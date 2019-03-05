@@ -24,7 +24,7 @@ Punktacja przedstawia się następująco:
 Za zadanie można otrzymać minimalnie 0, a maksymalnie 10 punktów. Otrzymanie niezerowej ilości punktów za podpunkty 3-7 wymaga wykonania podpunktu 1 lub 2. Pytania mogą dotyczyć kodu lub wiedzy podanej w wymaganiach do laboratorium (nie trzeba znać dokładnie sygnatur metod i funkcji, z których się korzysta, ale jeżeli korzysta się z jakiejś flagi, to warto wiedzieć co ona z grubsza oznacza). Należy przesłać kod źródłowy wraz z skryptem kompilującym rozwiązanie (mile widziany cmake, ewentualnie make) w formie zgodnej z regulaminem przedmiotu.
 
 - Uwagi
-  - Nie wolno korzystać z frameworków do komunikacji sieciowej – tylko gniazda!
+  - Nie wolno korzystać z frameworków do komunikacji sieciowej - tylko gniazda!
   - Nie wolno też korzystać z Akka
   - Brak rozwiązania na moodle = 0 punktów
 - Przy oddawaniu należy:
