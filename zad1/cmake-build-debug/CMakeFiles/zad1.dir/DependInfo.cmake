@@ -4,7 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/Pawel Maczuga PC/Documents/rozprochy/zad1/main.c" "C:/Users/Pawel Maczuga PC/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles/zad1.dir/main.c.obj"
+  "/home/pawel/Documents/rozprochy/zad1/communication.c" "/home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles/zad1.dir/communication.c.o"
+  "/home/pawel/Documents/rozprochy/zad1/input_reading.c" "/home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles/zad1.dir/input_reading.c.o"
+  "/home/pawel/Documents/rozprochy/zad1/main.c" "/home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles/zad1.dir/main.c.o"
+  "/home/pawel/Documents/rozprochy/zad1/tcp.c" "/home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles/zad1.dir/tcp.c.o"
+  "/home/pawel/Documents/rozprochy/zad1/token.c" "/home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles/zad1.dir/token.c.o"
+  "/home/pawel/Documents/rozprochy/zad1/useful.c" "/home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles/zad1.dir/useful.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

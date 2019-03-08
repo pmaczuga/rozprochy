@@ -1,9 +1,12 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/zad1.dir/main.c.obj"
+  "CMakeFiles/zad1.dir/main.c.o"
+  "CMakeFiles/zad1.dir/token.c.o"
+  "CMakeFiles/zad1.dir/useful.c.o"
+  "CMakeFiles/zad1.dir/tcp.c.o"
+  "CMakeFiles/zad1.dir/communication.c.o"
+  "CMakeFiles/zad1.dir/input_reading.c.o"
   "zad1.pdb"
-  "zad1.exe"
-  "zad1.exe.manifest"
-  "libzad1.dll.a"
+  "zad1"
 )
 
 # Per-language clean rules from dependency scanning.
