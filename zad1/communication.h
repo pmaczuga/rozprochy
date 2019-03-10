@@ -1,14 +1,23 @@
-#ifndef ZAD1_COMMUNICATION_H
-#define ZAD1_COMMUNICATION_H
+#include "config.h"
 
-#include "info.h"
-#include "useful.h"
-#include "token.h"
+#ifndef ZAD1_NEW_COMMUNICATION_H
+#define ZAD1_NEW_COMMUNICATION_H
 
-void init_communication(enum Protocol protocol_type, const char *my_id, int has_token, const char *ip, int port);
+#define MULTICAST_IP "224.0.0.1"
+#define MULTICAST_PORT 1997
 
-int send_message(const char *to, const char *msg);
+struct Sockets
+{
+    int socket_in;
+    int socket_out;
+    int socket_listen;
+    int epoll_fd;
+};
 
-char *receive_message();
+void init_communication(struct Args args);
 
-#endif //ZAD1_COMMUNICATION_H
+void send_message(const char *receiver, const char *message);
+
+void clean_comunication();
+
+#endif //ZAD1_NEW_COMMUNICATION_H

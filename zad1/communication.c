@@ -1,228 +1,231 @@
-#include <sys/socket.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include <pthread.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include "communication.h"
-#include "info.h"
+#include "config.h"
+#include "Queue.h"
 #include "tcp.h"
-#include "token.h"
+#include "udp.h"
 
-char id[SIZE];
-enum Protocol protocol;
-int has_token = FALSE;
+struct Queue *queue = NULL;
+struct Args arguments;
+struct Sockets *sockets;
+int socket_multicast;
 
-char *to_receive = NULL;
-char *to_send_normal = NULL;
-char *to_send_system = NULL;
-
+pthread_t thread;
 pthread_mutex_t memory_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-
-void send_token(struct Token *token)
+void send_message(const char *receiver, const char *message)
 {
-    if (protocol == TCP)
-    {
-        send_message_TCP(token_to_string(token));
-    }
-    else if (protocol == UDP)
-    {
-        // TODO
-    }
-}
-
-struct Token *receive_token()
-{
-    char *msg;
-    struct Token *token;
-    if (protocol == TCP)
-    {
-        msg = receive_message_TCP();
-        token = string_to_token(msg);
-        free(msg);
-    }
-    else if (protocol == UDP)
-    {
-        // TODO
-    }
-    return token;
-}
-
-int send_message(const char *to, const char *msg)
-{
+    struct Token token = new_token(MESSAGE, arguments.id, receiver, message);
     pthread_mutex_lock(&memory_mutex);
-    if (to_send_normal != NULL) return 1;
-
-    size_t size = sizeof(to) + sizeof(msg) + 3;
-    to_send_normal = malloc(size);
-    memset(to_send_normal, '\0', size);
-    sprintf(to_send_normal, "%s %s", to, msg);
+    if (is_full_queue(queue) == 0) put_queue(queue, token);
+    else print_error("Full message queue");
     pthread_mutex_unlock(&memory_mutex);
 }
 
-char *receive_message()
+int is_it_me(const char *ip, int port)
 {
-    if (to_receive == NULL) return NULL;
+    if (strcmp(ip, arguments.this_ip) != 0) return FALSE;
+    if (port != arguments.this_port) return FALSE;
+    return TRUE;
+}
 
-    char *msg = malloc(SIZE * sizeof(char));
-    memset(msg, '\0', SIZE);
+int is_it_my_neighbour(const char *ip, int port)
+{
+    if (strcmp(ip, arguments.neighbour_ip) != 0) return FALSE;
+    if (port != arguments.neighbour_port) return FALSE;
+    return TRUE;
+}
+
+void init_muliticast()
+{
+    int res;
+
+    socket_multicast = socket(AF_INET, SOCK_DGRAM, 0);
+    if (socket_multicast < 0) end_with_error_errno("Problem creating multicast socket");
+
+    struct sockaddr_in address;
+    bzero(&address, sizeof(address));
+    address.sin_family = AF_INET;
+    address.sin_port = htons(MULTICAST_PORT);
+    address.sin_addr.s_addr = inet_addr(MULTICAST_IP);
+
+    res = connect(socket_multicast, (struct sockaddr *) &address, sizeof(address));
+    if (res != 0) end_with_error_errno("Problem connecting multicast");
+}
+
+void send_multicast(struct Token token)
+{
+    char buf[BUF_SIZE];
+    strcpy(buf, arguments.id);
+    ssize_t size = strlen(buf);
+    buf[size] = ' ';
+    token_to_string(buf + size + 1, token);
+
+    size = send(socket_multicast, buf, strlen(buf) + 1, 0);
+    if (size < 0) print_error_errno("Problem sending multicast");
+}
+
+void handle_empty(struct Token *token)
+{
+    struct Token waiting_token;
+    pthread_mutex_lock(&memory_mutex);
+    if (is_empty_queue(queue) == 0)
+    {
+        waiting_token = get_queue(queue);
+        copy_token(token, &waiting_token);
+    }
+    pthread_mutex_unlock(&memory_mutex);
+}
+
+void handle_message(struct Token *token)
+{
+    if (strcmp(token->receiver, arguments.id) == 0)
+    {
+        print_token(*token);
+        clear_token(token);
+    }
+}
+
+void handle_change_neighbour(struct Token *token)
+{
+    struct ClientInfo client_info = client_info_from_string(token->message);
+    // If I am neighbour of new client neighbour - then I must pin to new client
+    if (is_it_my_neighbour(client_info.neighbour_ip, client_info.neighbour_port) == TRUE)
+    {
+        switch (arguments.protocol)
+        {
+            case TCP: change_neighbour_tcp(sockets, client_info.ip, client_info.port); break;
+            case UDP: change_neighbour_udp(sockets, client_info.ip, client_info.port); break;
+        }
+        // And change neighbour in arguments struct - just in case
+        strcpy(arguments.neighbour_ip, client_info.ip);
+        arguments.neighbour_port = client_info.port;
+
+        // Now send confirmation token to new neighbour
+        // Message and more importantly useful_int can't be changed
+        token->type = CONFIRM_CHANGE;
+        strcpy(token->sender, arguments.id);
+        strcpy(token->receiver, ANY);
+    }
+    // If not just send it further
+}
+
+void handle_confirm_change(struct Token *token)
+{
+    // There is socket responsible for new client in useful_int
+    switch (arguments.protocol)
+    {
+        case TCP: confirm_change_of_input_tcp(sockets, token->useful_int);
+        case UDP: confirm_change_of_input_udp(sockets, token->useful_int);
+    }
+
+    clear_token(token);
+}
+
+void handle_not_a_real_token(struct Token *token)
+{
+    // It's not a real token - it wan't be sent anywhere right now
+    // It will have to wait for it's turn in queue
+    struct Token token_to_queue;
+    copy_token(&token_to_queue, token);
+    token_to_queue.type = CHANGE_NEIGHBOUR;
 
     pthread_mutex_lock(&memory_mutex);
-    strcpy(msg, to_receive);
-    free(&to_receive);
-    to_receive = NULL;
+    if (is_full_queue(queue) == 0) put_queue(queue, token_to_queue);
+    else print_error("Can't put change neighbour token to queue");
     pthread_mutex_unlock(&memory_mutex);
-
-    return msg;
 }
 
-int check_connection_request()
+void handle_ttl(struct Token *token)
 {
-    if (to_send_system != NULL) return 1;
-    if (protocol == TCP)
+    if (strcmp(token->sender, arguments.id) == 0)
     {
-        char *msg = check_connection_request_TCP();
-        if (msg == NULL) return 1;
-        to_send_system = malloc(sizeof(*msg + 1));
-        memset(to_send_system, '\0', sizeof(*to_send_system));
-        strcpy(to_send_system, msg);
-        free(msg);
+        token->ttl--;
     }
-    else if (protocol == UDP)
+    if (token->ttl <= 0)
     {
-        // TODO
+        printf("\nRemoving token with TTL = 0\n");
+        clear_token(token);
     }
-    return 0;
 }
 
-void *start(void *ptr)
+void *start_communication(void *ptr)
 {
     while(1)
     {
-        // receive token  and sleep // TODO multicast
-        struct Token *token = receive_token();
-        has_token = TRUE;
+        struct Token token;
+        switch (arguments.protocol)
+        {
+            case TCP: token = receive_tcp(sockets); break;
+            case UDP: token = receive_udp(sockets); break;
+        }
+
+        send_multicast(token);
+
+        // -------------FOR-TESTING---------------
+//        print_token(token);
+        // ----------------END--------------------
         sleep(1);
 
-        pthread_mutex_lock(&memory_mutex);
-        if (token->is_busy == TRUE)
+        // Decrease ttl - clear token if 0
+        handle_ttl(&token);
+
+        // Depending on what type is that token we can change its content and send it forward
+        switch (token.type)
         {
-            if (token->type == NORMAL && strcmp(token->receiver, id) == 0)
-            {
-                to_receive = malloc(sizeof(token->message) + 1);
-                memset(to_receive, '\0', sizeof(*to_receive));
-                strcpy(to_receive, token->message);
-                memset(token, '\0', sizeof(*token));
-                token->is_busy = FALSE;
-            }
-            else if (token->type == CHANGE_NEIGHBOUR)
-            {
-                printf("Change neighbour\n");
-                char old_neighbour_ip[SIZE];
-                int old_neighbour_port;
-                char new_neighbour_ip[SIZE];
-                int new_neighbour_port;
-                sscanf(token->message, "%s %d %s %d", new_neighbour_ip, &new_neighbour_port, old_neighbour_ip, &old_neighbour_port);
-
-                printf("Neighbour change msg: %s\n", token->message);
-                printf("%s %d %s %d\n", new_neighbour_ip, new_neighbour_port, old_neighbour_ip, old_neighbour_port);
-
-                if (protocol == TCP && is_neighbour_equal_to_TCP(old_neighbour_ip, old_neighbour_port) == TRUE)
-                {
-                    change_neighbour_TCP(new_neighbour_ip, new_neighbour_port);
-                }
-                else if (protocol == UDP && 0)
-                {
-                    // TODO
-                }
-                token->type == CONFIRMATION;
-
-            }
-            else if (token->type == CONFIRMATION)
-            {
-                char new_commer_ip[SIZE];
-                int new_commer_port;
-                char his_neighbour_ip[SIZE];
-                int his_neighbour_port;
-                sscanf(token->message, "%s %d %s %d", new_commer_ip, &new_commer_port, his_neighbour_ip, &his_neighbour_port);
-
-                if (protocol == TCP && is_myself_equal_to_TCP(his_neighbour_ip, his_neighbour_port))
-                {
-                    confirm_in_connection_change_TCP();
-                    memset(token, '\0', sizeof(*token));
-                    token->is_busy = FALSE;
-                }
-                else if (protocol == UDP && 0)
-                {
-                    // TODO
-                }
-            }
+            case EMPTY: handle_empty(&token); break;
+            case MESSAGE: handle_message(&token); break;
+            case CHANGE_NEIGHBOUR: handle_change_neighbour(&token); break;
+            case CONFIRM_CHANGE: handle_confirm_change(&token); break;
+            case NOT_A_REAL_TOKEN: handle_not_a_real_token(&token); break;
         }
 
-        if (token->is_busy == FALSE)
+        // Now if it is real token we send it to neighbour
+        if (token.type != NOT_A_REAL_TOKEN)
         {
-            // check if there are requests to connect
-            check_connection_request();
-
-            if (to_send_system != NULL)
+            switch (arguments.protocol)
             {
-                strcpy(token-> message, to_send_system);
-                strcpy(token->receiver, RECV_ANY);
-                token->type = CHANGE_NEIGHBOUR;
-//                free(to_send_system);
-                to_send_system = NULL;
-                strcpy(token->sender, id);
-                token->is_busy = TRUE;
-                printf("SENT SYSTEM\n");
-            }
-            else if (to_send_normal != NULL)
-            {
-                char receiver[SIZE];
-                char msg[SIZE];
-                sscanf(to_send_normal, "%s %[^.]", receiver, msg);
-                free(to_send_normal);
-                to_send_normal = NULL;
-                strcpy(token->receiver, receiver);
-                strcpy(token->message, msg);
-                token->type = NORMAL;
-                strcpy(token->sender, id);
-                token->is_busy = TRUE;
+                case TCP: send_tcp(sockets, token); break;
+                case UDP: send_udp(sockets, token); break;
             }
         }
-        pthread_mutex_unlock(&memory_mutex);
-
-
-        send_token(token);
-        has_token = FALSE;
-        free(token);
     }
 }
 
-void init_communication(enum Protocol protocol_type, const char *my_id, int has_token_at_start, const char *neighbour_IP, int neighbour_port)
+void init_communication(struct Args args)
 {
-    protocol = protocol_type;
-    strcpy(id, my_id);
-    has_token = has_token_at_start;
-
-    if (protocol_type == TCP)
+    arguments = args;
+    queue = new_queue();
+    switch (arguments.protocol)
     {
-        init_TCP(neighbour_IP, neighbour_port);
-    }
-    else if (protocol_type == UDP)
-    {
-        // TODO
+        case TCP: sockets = init_tcp(arguments); break;
+        case UDP: sockets = init_udp(arguments); break;
     }
 
-    if (has_token == TRUE)
-    {
-        struct Token *token = malloc(sizeof(struct Token));
-        memset(token, '\0', sizeof(*token));
-        token->is_busy = FALSE;
-        send_message_TCP(token_to_string(token));
-        free(token);
-    }
+    init_muliticast();
 
-    pthread_t communication_thread;
-    pthread_create(&communication_thread, NULL, &start, NULL);
+    pthread_create(&thread, NULL, start_communication, NULL);
+}
+
+void clean_comunication()
+{
+    delete_queue(queue);
+
+    pthread_cancel(thread);
+
+    pthread_mutex_destroy(&memory_mutex);
+
+    switch (arguments.protocol)
+    {
+        case TCP: clean_tcp(sockets); break;
+        case UDP: clean_udp(sockets); break;
+    }
 }

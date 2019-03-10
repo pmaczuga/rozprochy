@@ -1,35 +1,95 @@
-#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "info.h"
-
 #include "token.h"
 
-struct Token* string_to_token(const char* string)
+struct Token new_empty_token()
 {
-    struct Token *token = malloc(sizeof(struct Token));
-    memset(token, '\0', sizeof(*token));
-    sscanf(string, "%d %d %s %s %[^\n]", &token->is_busy, &token->type, token->sender, token->receiver, token->message);
+    struct Token token;
+    clear_token(&token);
+
     return token;
 }
 
-char* token_to_string(struct Token* token)
+struct Token new_token(enum MessageType type, const char* sender, const char *receiver, const char *message)
 {
-    char *string = malloc(SIZE * sizeof(char));
-    memset(string, '\0', SIZE * sizeof(char));
-    sprintf(string, "%d %d %s %s %s", token->is_busy, token->type, token->sender, token->receiver, token->message);
-    return string;
+    struct Token token;
+    bzero(&token, sizeof(token));
+    token.type = type;
+    strcpy(token.sender, sender);
+    strcpy(token.receiver, receiver);
+    token.useful_int = 0;
+    token.ttl = TTL;
+    strcpy(token.message, message);
 
+    return token;
 }
 
-void print_token(struct Token* token)
+struct Token token_from_string(const char *string)
 {
-    printf("TOKEN   ");
-    if (token->is_busy == 0) printf("free ");
-    else printf("busy ");
-    if(token->type == NORMAL) printf("NORMAL ");
-    else if(token->type == CHANGE_NEIGHBOUR) printf("SYSTEM ");
-    printf("-sender: %s ", token->sender);
-    printf("-receiver: %s ", token->receiver);
-    printf("-message: \"%s\"\n", token->message);
+    struct Token token;
+    bzero(&token, sizeof(token));
+    sscanf(string, "%d %s %s %d %d %[^\n]", &token.type, token.sender, token.receiver, &token.useful_int, &token.ttl, token.message);
+    return token;
+}
+
+void token_to_string(char *dest, struct Token token)
+{
+    sprintf(dest, "%d %s %s %d %d %s", token.type, token.sender, token.receiver, token.useful_int, token.ttl, token.message);
+}
+
+void copy_token(struct Token *dest, struct Token *source)
+{
+    dest->type = source->type;
+    strcpy(dest->sender, source->sender);
+    strcpy(dest->receiver, source->receiver);
+    strcpy(dest->message, source->message);
+    dest->useful_int = source->useful_int;
+    dest->ttl = source->ttl;
+}
+
+void clear_token(struct Token *token)
+{
+    bzero(token, sizeof(*token));
+    token->type = EMPTY;
+    strcpy(token->sender, ANY);
+    strcpy(token->receiver, ANY);
+    token->useful_int = 0;
+    token->ttl = TTL;
+}
+
+void print_token(struct Token token)
+{
+    printf("\n-------TOKEN------------\n");
+    printf("Type:      %d\n", token.type);
+    printf("Sender:    %s\n", token.sender);
+    printf("Receiver   %s\n", token.receiver);
+    printf("Useful int %d\n", token.useful_int);
+    printf("TTL:       %d\n", token.ttl);
+    printf("Message:   \"%s\"\n", token.message);
+    printf("--------------------------\n\n");
+}
+
+struct ClientInfo new_client_info(const char*ip, int port, const char *neighbour_ip, int neighbour_port)
+{
+    struct ClientInfo client_info;
+    bzero(&client_info, sizeof(client_info));
+    strcpy(client_info.ip, ip);
+    client_info.port = port;
+    strcpy(client_info.neighbour_ip, neighbour_ip);
+    client_info.neighbour_port = neighbour_port;
+
+    return client_info;
+}
+
+struct ClientInfo client_info_from_string(const char *string)
+{
+    struct ClientInfo client_info;
+    bzero(&client_info, sizeof(client_info));
+    sscanf(string, "%s %d %s %d", client_info.ip, &client_info.port, client_info.neighbour_ip, &client_info.neighbour_port);
+    return client_info;
+}
+
+void client_info_to_string(char *dest, struct ClientInfo client_info)
+{
+    sprintf(dest, "%s %d %s %d", client_info.ip, client_info.port, client_info.neighbour_ip, client_info.neighbour_port);
 }

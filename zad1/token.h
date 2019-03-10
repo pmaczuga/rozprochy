@@ -1,33 +1,57 @@
-//
-// Created by pawel on 3/7/19.
-//
+#ifndef ZAD1_NEW_TOKEN_H
+#define ZAD1_NEW_TOKEN_H
 
-#ifndef ZAD1_TOKEN_H
-#define ZAD1_TOKEN_H
+#include "config.h"
 
-#include "info.h"
+#define ANY "ANY"
+#define TTL 2
 
 enum MessageType
 {
-    NORMAL = 0,
-    CHANGE_NEIGHBOUR = 1,
-    CONFIRMATION = 2
+    EMPTY = 0,
+    MESSAGE,
+    CHANGE_NEIGHBOUR,
+    CONFIRM_CHANGE,
+    NOT_A_REAL_TOKEN
 };
 
 struct Token
 {
-    int is_busy;
     enum MessageType type;
-    char sender[SIZE];
-    char receiver[SIZE];
-    char message[SIZE];
+    char sender[BUF_SIZE];
+    char receiver[BUF_SIZE];
+    int useful_int;
+    int ttl;
+    char message[BUF_SIZE];
 };
 
-struct Token* string_to_token(const char* string);
+struct ClientInfo
+{
+    char ip[BUF_SIZE];
+    int port;
+    char neighbour_ip[BUF_SIZE];
+    int neighbour_port;
+};
 
-char* token_to_string(struct Token* token);
+struct Token new_empty_token();
 
-void print_token(struct Token* token);
+struct Token new_token(enum MessageType type, const char* sender, const char *receiver, const char *message);
+
+void copy_token(struct Token *dest, struct Token *source);
+
+void clear_token(struct Token *token);
+
+struct Token token_from_string(const char *string);
+
+void token_to_string(char *dest, struct Token token);
+
+void print_token(struct Token token);
+
+struct ClientInfo new_client_info(const char*ip, int port, const char *neighbour_ip, int neighbour_port);
+
+struct ClientInfo client_info_from_string(const char *string);
+
+void client_info_to_string(char *dest, struct ClientInfo client_info);
 
 
-#endif //ZAD1_TOKEN_H
+#endif //ZAD1_NEW_TOKEN_H

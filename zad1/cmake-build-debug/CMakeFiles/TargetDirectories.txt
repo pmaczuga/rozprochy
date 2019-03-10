@@ -1,3 +1,3 @@
-/home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles/zad1.dir
+/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/CMakeFiles/zad1_new.dir

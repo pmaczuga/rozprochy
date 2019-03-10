@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="zad1_new"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="zad1_new">
+				<Option output="/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/zad1_new" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 zad1_new"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="zad1_new/fast">
+				<Option output="/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/zad1_new" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 zad1_new/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/Queue.c">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/Queue.h">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/communication.c">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/communication.h">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/config.c">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/config.h">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/main.c">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/tcp.c">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/tcp.h">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/token.c">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/token.h">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/udp.c">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/udp.h">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,29 +1,20 @@
-//
-// Created by pawel on 3/7/19.
-//
+#ifndef ZAD1_NEW_TCP_H
+#define ZAD1_NEW_TCP_H
 
-#ifndef ZAD1_TCP_H
-#define ZAD1_TCP_H
-
-void init_TCP(const char *neighbour_IP, int neighbour_port);
-
-void send_message_TCP(const char *msg);
-
-char *receive_message();
-
-char *receive_message_TCP();
-
-char *check_connection_request_TCP();
-
-void change_neighbour_TCP(const char *neighbour_IP, int neighbour_port);
-
-int is_neighbour_equal_to_TCP(const char *ip, int port);
-
-int is_myself_equal_to_TCP(const char *ip, int port);
-
-void confirm_in_connection_change_TCP();
+#include "token.h"
 
 
-void close_connection_TCP();
+struct Sockets *init_tcp(struct Args args);
 
-#endif //ZAD1_TCP_H
+void send_tcp(struct Sockets *sockets, struct Token token);
+
+struct Token receive_tcp(struct Sockets *sockets);
+
+void change_neighbour_tcp(struct Sockets *sockets, const char *ip, int port);
+
+void confirm_change_of_input_tcp(struct Sockets *sockets, int useful_int);
+
+void clean_tcp(struct Sockets *sockets);
+
+
+#endif //ZAD1_NEW_TCP_H

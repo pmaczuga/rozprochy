@@ -48,10 +48,10 @@ RM = /opt/clion-2018.1/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pawel/Documents/rozprochy/zad1
+CMAKE_SOURCE_DIR = /home/pawel/Documents/rozprochy/zad1_new
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pawel/Documents/rozprochy/zad1/cmake-build-debug
+CMAKE_BINARY_DIR = /home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles /home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/CMakeFiles /home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pawel/Documents/rozprochy/zad1/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named zad1
+# Target rules for targets named zad1_new
 
 # Build rule for target.
-zad1: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 zad1
-.PHONY : zad1
+zad1_new: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 zad1_new
+.PHONY : zad1_new
 
 # fast build rule for target.
-zad1/fast:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/build
-.PHONY : zad1/fast
+zad1_new/fast:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/build
+.PHONY : zad1_new/fast
+
+Queue.o: Queue.c.o
+
+.PHONY : Queue.o
+
+# target to build an object file
+Queue.c.o:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/Queue.c.o
+.PHONY : Queue.c.o
+
+Queue.i: Queue.c.i
+
+.PHONY : Queue.i
+
+# target to preprocess a source file
+Queue.c.i:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/Queue.c.i
+.PHONY : Queue.c.i
+
+Queue.s: Queue.c.s
+
+.PHONY : Queue.s
+
+# target to generate assembly for a file
+Queue.c.s:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/Queue.c.s
+.PHONY : Queue.c.s
 
 communication.o: communication.c.o
 
@@ -129,7 +156,7 @@ communication.o: communication.c.o
 
 # target to build an object file
 communication.c.o:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/communication.c.o
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/communication.c.o
 .PHONY : communication.c.o
 
 communication.i: communication.c.i
@@ -138,7 +165,7 @@ communication.i: communication.c.i
 
 # target to preprocess a source file
 communication.c.i:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/communication.c.i
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/communication.c.i
 .PHONY : communication.c.i
 
 communication.s: communication.c.s
@@ -147,35 +174,35 @@ communication.s: communication.c.s
 
 # target to generate assembly for a file
 communication.c.s:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/communication.c.s
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/communication.c.s
 .PHONY : communication.c.s
 
-input_reading.o: input_reading.c.o
+config.o: config.c.o
 
-.PHONY : input_reading.o
+.PHONY : config.o
 
 # target to build an object file
-input_reading.c.o:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/input_reading.c.o
-.PHONY : input_reading.c.o
+config.c.o:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/config.c.o
+.PHONY : config.c.o
 
-input_reading.i: input_reading.c.i
+config.i: config.c.i
 
-.PHONY : input_reading.i
+.PHONY : config.i
 
 # target to preprocess a source file
-input_reading.c.i:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/input_reading.c.i
-.PHONY : input_reading.c.i
+config.c.i:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/config.c.i
+.PHONY : config.c.i
 
-input_reading.s: input_reading.c.s
+config.s: config.c.s
 
-.PHONY : input_reading.s
+.PHONY : config.s
 
 # target to generate assembly for a file
-input_reading.c.s:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/input_reading.c.s
-.PHONY : input_reading.c.s
+config.c.s:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/config.c.s
+.PHONY : config.c.s
 
 main.o: main.c.o
 
@@ -183,7 +210,7 @@ main.o: main.c.o
 
 # target to build an object file
 main.c.o:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/main.c.o
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/main.c.o
 .PHONY : main.c.o
 
 main.i: main.c.i
@@ -192,7 +219,7 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/main.c.i
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -201,7 +228,7 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/main.c.s
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/main.c.s
 .PHONY : main.c.s
 
 tcp.o: tcp.c.o
@@ -210,7 +237,7 @@ tcp.o: tcp.c.o
 
 # target to build an object file
 tcp.c.o:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/tcp.c.o
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/tcp.c.o
 .PHONY : tcp.c.o
 
 tcp.i: tcp.c.i
@@ -219,7 +246,7 @@ tcp.i: tcp.c.i
 
 # target to preprocess a source file
 tcp.c.i:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/tcp.c.i
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/tcp.c.i
 .PHONY : tcp.c.i
 
 tcp.s: tcp.c.s
@@ -228,7 +255,7 @@ tcp.s: tcp.c.s
 
 # target to generate assembly for a file
 tcp.c.s:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/tcp.c.s
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/tcp.c.s
 .PHONY : tcp.c.s
 
 token.o: token.c.o
@@ -237,7 +264,7 @@ token.o: token.c.o
 
 # target to build an object file
 token.c.o:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/token.c.o
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/token.c.o
 .PHONY : token.c.o
 
 token.i: token.c.i
@@ -246,7 +273,7 @@ token.i: token.c.i
 
 # target to preprocess a source file
 token.c.i:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/token.c.i
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/token.c.i
 .PHONY : token.c.i
 
 token.s: token.c.s
@@ -255,35 +282,35 @@ token.s: token.c.s
 
 # target to generate assembly for a file
 token.c.s:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/token.c.s
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/token.c.s
 .PHONY : token.c.s
 
-useful.o: useful.c.o
+udp.o: udp.c.o
 
-.PHONY : useful.o
+.PHONY : udp.o
 
 # target to build an object file
-useful.c.o:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/useful.c.o
-.PHONY : useful.c.o
+udp.c.o:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/udp.c.o
+.PHONY : udp.c.o
 
-useful.i: useful.c.i
+udp.i: udp.c.i
 
-.PHONY : useful.i
+.PHONY : udp.i
 
 # target to preprocess a source file
-useful.c.i:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/useful.c.i
-.PHONY : useful.c.i
+udp.c.i:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/udp.c.i
+.PHONY : udp.c.i
 
-useful.s: useful.c.s
+udp.s: udp.c.s
 
-.PHONY : useful.s
+.PHONY : udp.s
 
 # target to generate assembly for a file
-useful.c.s:
-	$(MAKE) -f CMakeFiles/zad1.dir/build.make CMakeFiles/zad1.dir/useful.c.s
-.PHONY : useful.c.s
+udp.c.s:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/udp.c.s
+.PHONY : udp.c.s
 
 # Help Target
 help:
@@ -293,13 +320,16 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... zad1"
+	@echo "... zad1_new"
+	@echo "... Queue.o"
+	@echo "... Queue.i"
+	@echo "... Queue.s"
 	@echo "... communication.o"
 	@echo "... communication.i"
 	@echo "... communication.s"
-	@echo "... input_reading.o"
-	@echo "... input_reading.i"
-	@echo "... input_reading.s"
+	@echo "... config.o"
+	@echo "... config.i"
+	@echo "... config.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -309,9 +339,9 @@ help:
 	@echo "... token.o"
 	@echo "... token.i"
 	@echo "... token.s"
-	@echo "... useful.o"
-	@echo "... useful.i"
-	@echo "... useful.s"
+	@echo "... udp.o"
+	@echo "... udp.i"
+	@echo "... udp.s"
 .PHONY : help
 
 
