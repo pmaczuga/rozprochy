@@ -13,6 +13,7 @@ CMakeFiles/zad1_new.dir/communication.c.o
  /home/pawel/Documents/rozprochy/zad1_new/config.h
  /home/pawel/Documents/rozprochy/zad1_new/tcp.h
  /home/pawel/Documents/rozprochy/zad1_new/token.h
+ /home/pawel/Documents/rozprochy/zad1_new/udp.h
 CMakeFiles/zad1_new.dir/config.c.o
  /home/pawel/Documents/rozprochy/zad1_new/config.c
  /home/pawel/Documents/rozprochy/zad1_new/config.h
@@ -31,3 +32,9 @@ CMakeFiles/zad1_new.dir/token.c.o
  /home/pawel/Documents/rozprochy/zad1_new/config.h
  /home/pawel/Documents/rozprochy/zad1_new/token.c
  /home/pawel/Documents/rozprochy/zad1_new/token.h
+CMakeFiles/zad1_new.dir/udp.c.o
+ /home/pawel/Documents/rozprochy/zad1_new/communication.h
+ /home/pawel/Documents/rozprochy/zad1_new/config.h
+ /home/pawel/Documents/rozprochy/zad1_new/token.h
+ /home/pawel/Documents/rozprochy/zad1_new/udp.c
+ /home/pawel/Documents/rozprochy/zad1_new/udp.h

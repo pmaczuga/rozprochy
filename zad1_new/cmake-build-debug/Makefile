@@ -285,6 +285,33 @@ token.c.s:
 	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/token.c.s
 .PHONY : token.c.s
 
+udp.o: udp.c.o
+
+.PHONY : udp.o
+
+# target to build an object file
+udp.c.o:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/udp.c.o
+.PHONY : udp.c.o
+
+udp.i: udp.c.i
+
+.PHONY : udp.i
+
+# target to preprocess a source file
+udp.c.i:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/udp.c.i
+.PHONY : udp.c.i
+
+udp.s: udp.c.s
+
+.PHONY : udp.s
+
+# target to generate assembly for a file
+udp.c.s:
+	$(MAKE) -f CMakeFiles/zad1_new.dir/build.make CMakeFiles/zad1_new.dir/udp.c.s
+.PHONY : udp.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -312,6 +339,9 @@ help:
 	@echo "... token.o"
 	@echo "... token.i"
 	@echo "... token.s"
+	@echo "... udp.o"
+	@echo "... udp.i"
+	@echo "... udp.s"
 .PHONY : help
 
 

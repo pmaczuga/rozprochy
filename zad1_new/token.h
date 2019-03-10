@@ -4,6 +4,7 @@
 #include "config.h"
 
 #define ANY "ANY"
+#define TTL 2
 
 enum MessageType
 {
@@ -20,6 +21,7 @@ struct Token
     char sender[BUF_SIZE];
     char receiver[BUF_SIZE];
     int useful_int;
+    int ttl;
     char message[BUF_SIZE];
 };
 

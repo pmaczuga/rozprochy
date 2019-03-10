@@ -12,6 +12,7 @@ CMakeFiles/zad1_new.dir/communication.c.o: ../communication.h
 CMakeFiles/zad1_new.dir/communication.c.o: ../config.h
 CMakeFiles/zad1_new.dir/communication.c.o: ../tcp.h
 CMakeFiles/zad1_new.dir/communication.c.o: ../token.h
+CMakeFiles/zad1_new.dir/communication.c.o: ../udp.h
 
 CMakeFiles/zad1_new.dir/config.c.o: ../config.c
 CMakeFiles/zad1_new.dir/config.c.o: ../config.h
@@ -30,4 +31,10 @@ CMakeFiles/zad1_new.dir/tcp.c.o: ../token.h
 CMakeFiles/zad1_new.dir/token.c.o: ../config.h
 CMakeFiles/zad1_new.dir/token.c.o: ../token.c
 CMakeFiles/zad1_new.dir/token.c.o: ../token.h
+
+CMakeFiles/zad1_new.dir/udp.c.o: ../communication.h
+CMakeFiles/zad1_new.dir/udp.c.o: ../config.h
+CMakeFiles/zad1_new.dir/udp.c.o: ../token.h
+CMakeFiles/zad1_new.dir/udp.c.o: ../udp.c
+CMakeFiles/zad1_new.dir/udp.c.o: ../udp.h
 

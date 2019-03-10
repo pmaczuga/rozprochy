@@ -111,6 +111,12 @@
 		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/token.h">
 			<Option target="zad1_new"/>
 		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/udp.c">
+			<Option target="zad1_new"/>
+		</Unit>
+		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/udp.h">
+			<Option target="zad1_new"/>
+		</Unit>
 		<Unit filename="/home/pawel/Documents/rozprochy/zad1_new/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

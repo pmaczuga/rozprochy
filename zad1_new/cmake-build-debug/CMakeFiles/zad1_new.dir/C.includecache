@@ -35,6 +35,12 @@ unistd.h
 -
 string.h
 -
+sys/socket.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
 communication.h
 /home/pawel/Documents/rozprochy/zad1_new/communication.h
 config.h
@@ -43,6 +49,8 @@ Queue.h
 /home/pawel/Documents/rozprochy/zad1_new/Queue.h
 tcp.h
 /home/pawel/Documents/rozprochy/zad1_new/tcp.h
+udp.h
+/home/pawel/Documents/rozprochy/zad1_new/udp.h
 
 /home/pawel/Documents/rozprochy/zad1_new/communication.h
 config.h
@@ -72,6 +80,12 @@ stdint.h
 
 /home/pawel/Documents/rozprochy/zad1_new/main.c
 stdio.h
+-
+string.h
+-
+signal.h
+-
+stdlib.h
 -
 config.h
 /home/pawel/Documents/rozprochy/zad1_new/config.h
@@ -117,4 +131,32 @@ token.h
 /home/pawel/Documents/rozprochy/zad1_new/token.h
 config.h
 /home/pawel/Documents/rozprochy/zad1_new/config.h
+
+/home/pawel/Documents/rozprochy/zad1_new/udp.c
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+sys/epoll.h
+-
+unistd.h
+-
+sys/types.h
+-
+communication.h
+/home/pawel/Documents/rozprochy/zad1_new/communication.h
+udp.h
+/home/pawel/Documents/rozprochy/zad1_new/udp.h
+
+/home/pawel/Documents/rozprochy/zad1_new/udp.h
+token.h
+/home/pawel/Documents/rozprochy/zad1_new/token.h
 

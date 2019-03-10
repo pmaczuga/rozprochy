@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/pawel/Documents/rozprochy/zad1_new/main.c" "/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/CMakeFiles/zad1_new.dir/main.c.o"
   "/home/pawel/Documents/rozprochy/zad1_new/tcp.c" "/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/CMakeFiles/zad1_new.dir/tcp.c.o"
   "/home/pawel/Documents/rozprochy/zad1_new/token.c" "/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/CMakeFiles/zad1_new.dir/token.c.o"
+  "/home/pawel/Documents/rozprochy/zad1_new/udp.c" "/home/pawel/Documents/rozprochy/zad1_new/cmake-build-debug/CMakeFiles/zad1_new.dir/udp.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

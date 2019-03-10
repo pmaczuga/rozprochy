@@ -18,6 +18,7 @@ struct Token new_token(enum MessageType type, const char* sender, const char *re
     strcpy(token.sender, sender);
     strcpy(token.receiver, receiver);
     token.useful_int = 0;
+    token.ttl = TTL;
     strcpy(token.message, message);
 
     return token;
@@ -27,13 +28,13 @@ struct Token token_from_string(const char *string)
 {
     struct Token token;
     bzero(&token, sizeof(token));
-    sscanf(string, "%d %s %s %d %[^\n]", &token.type, token.sender, token.receiver, &token.useful_int,token.message);
+    sscanf(string, "%d %s %s %d %d %[^\n]", &token.type, token.sender, token.receiver, &token.useful_int, &token.ttl, token.message);
     return token;
 }
 
 void token_to_string(char *dest, struct Token token)
 {
-    sprintf(dest, "%d %s %s %d %s", token.type, token.sender, token.receiver, token.useful_int, token.message);
+    sprintf(dest, "%d %s %s %d %d %s", token.type, token.sender, token.receiver, token.useful_int, token.ttl, token.message);
 }
 
 void copy_token(struct Token *dest, struct Token *source)
@@ -43,6 +44,7 @@ void copy_token(struct Token *dest, struct Token *source)
     strcpy(dest->receiver, source->receiver);
     strcpy(dest->message, source->message);
     dest->useful_int = source->useful_int;
+    dest->ttl = source->ttl;
 }
 
 void clear_token(struct Token *token)
@@ -52,6 +54,7 @@ void clear_token(struct Token *token)
     strcpy(token->sender, ANY);
     strcpy(token->receiver, ANY);
     token->useful_int = 0;
+    token->ttl = TTL;
 }
 
 void print_token(struct Token token)
@@ -61,6 +64,7 @@ void print_token(struct Token token)
     printf("Sender:    %s\n", token.sender);
     printf("Receiver   %s\n", token.receiver);
     printf("Useful int %d\n", token.useful_int);
+    printf("TTL:       %d\n", token.ttl);
     printf("Message:   \"%s\"\n", token.message);
     printf("--------------------------\n\n");
 }

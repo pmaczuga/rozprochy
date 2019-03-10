@@ -12,9 +12,9 @@ struct Token receive_tcp(struct Sockets *sockets);
 
 void change_neighbour_tcp(struct Sockets *sockets, const char *ip, int port);
 
-void confirm_change_of_input(struct Sockets *sockets, int useful_int);
+void confirm_change_of_input_tcp(struct Sockets *sockets, int useful_int);
 
-void delete_sockets(struct Sockets *sockets);
+void clean_tcp(struct Sockets *sockets);
 
 
 #endif //ZAD1_NEW_TCP_H

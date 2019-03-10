@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/zad1_new.dir/Queue.c.o"
   "CMakeFiles/zad1_new.dir/communication.c.o"
   "CMakeFiles/zad1_new.dir/tcp.c.o"
+  "CMakeFiles/zad1_new.dir/udp.c.o"
   "zad1_new.pdb"
   "zad1_new"
 )
