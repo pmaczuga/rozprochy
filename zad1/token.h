@@ -11,6 +11,7 @@ enum MessageType
 {
     NORMAL = 0,
     CHANGE_NEIGHBOUR = 1,
+    CONFIRMATION = 2
 };
 
 struct Token

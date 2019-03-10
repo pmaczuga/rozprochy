@@ -95,12 +95,12 @@ int set_socket_non_blocking(int socket_fd)
     fcntl(socket_fd, F_SETFL, flags);
 }
 
-char *get_IP_from_sockaddr(struct sockaddr* address)
+char *get_IP_from_sockaddr(struct sockaddr_in* address)
 {
-    return inet_ntoa(((struct sockaddr_in *) address)->sin_addr);
+    return inet_ntoa(address->sin_addr);
 }
 
-int get_port_from_sockaddr(struct sockaddr* address)
+int get_port_from_sockaddr(struct sockaddr_in* address)
 {
-    return ((struct sockaddr_in *) address)->sin_port;
+    return ntohs(address->sin_port);
 }

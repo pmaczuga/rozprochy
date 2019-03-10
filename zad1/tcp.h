@@ -17,7 +17,12 @@ char *check_connection_request_TCP();
 
 void change_neighbour_TCP(const char *neighbour_IP, int neighbour_port);
 
-int is_neighbour_equal_to(const char *ip, int port);
+int is_neighbour_equal_to_TCP(const char *ip, int port);
+
+int is_myself_equal_to_TCP(const char *ip, int port);
+
+void confirm_in_connection_change_TCP();
+
 
 void close_connection_TCP();
 

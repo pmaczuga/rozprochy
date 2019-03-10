@@ -9,14 +9,14 @@ struct Token* string_to_token(const char* string)
 {
     struct Token *token = malloc(sizeof(struct Token));
     memset(token, '\0', sizeof(*token));
-    sscanf(string, "%d %d %s %s %[^.]", &token->is_busy, &token->type, token->sender, token->receiver, token->message);
+    sscanf(string, "%d %d %s %s %[^\n]", &token->is_busy, &token->type, token->sender, token->receiver, token->message);
     return token;
 }
 
 char* token_to_string(struct Token* token)
 {
-    char *string = malloc(SIZE);
-    memset(string, '\0', SIZE);
+    char *string = malloc(SIZE * sizeof(char));
+    memset(string, '\0', SIZE * sizeof(char));
     sprintf(string, "%d %d %s %s %s", token->is_busy, token->type, token->sender, token->receiver, token->message);
     return string;
 

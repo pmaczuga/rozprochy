@@ -42,6 +42,10 @@ struct Token *receive_token()
         token = string_to_token(msg);
         free(msg);
     }
+    else if (protocol == UDP)
+    {
+        // TODO
+    }
     return token;
 }
 
@@ -61,12 +65,12 @@ char *receive_message()
 {
     if (to_receive == NULL) return NULL;
 
-    char *msg = malloc(SIZE);
+    char *msg = malloc(SIZE * sizeof(char));
     memset(msg, '\0', SIZE);
 
     pthread_mutex_lock(&memory_mutex);
     strcpy(msg, to_receive);
-    free(to_receive);
+    free(&to_receive);
     to_receive = NULL;
     pthread_mutex_unlock(&memory_mutex);
 
@@ -75,10 +79,11 @@ char *receive_message()
 
 int check_connection_request()
 {
-    if (to_send_system == NULL) return 1;
+    if (to_send_system != NULL) return 1;
     if (protocol == TCP)
     {
         char *msg = check_connection_request_TCP();
+        if (msg == NULL) return 1;
         to_send_system = malloc(sizeof(*msg + 1));
         memset(to_send_system, '\0', sizeof(*to_send_system));
         strcpy(to_send_system, msg);
@@ -95,9 +100,6 @@ void *start(void *ptr)
 {
     while(1)
     {
-        // check if there are requests to connect
-        check_connection_request();
-
         // receive token  and sleep // TODO multicast
         struct Token *token = receive_token();
         has_token = TRUE;
@@ -116,27 +118,63 @@ void *start(void *ptr)
             }
             else if (token->type == CHANGE_NEIGHBOUR)
             {
-                char *old_neighbout_ip;
-                int old_neighbout_port;
-                char *new_neighbout_ip;
-                int new_neighbout_port;
-                sscanf(token->message, "%s %d %s %d", new_neighbout_ip, new_neighbout_port, old_neighbout_ip, old_neighbout_port);
-                if (is_neighbour_equal_to(old_neighbout_ip, old_neighbout_port));
-                change_neighbour_TCP(new_neighbout_ip, new_neighbout_port);
+                printf("Change neighbour\n");
+                char old_neighbour_ip[SIZE];
+                int old_neighbour_port;
+                char new_neighbour_ip[SIZE];
+                int new_neighbour_port;
+                sscanf(token->message, "%s %d %s %d", new_neighbour_ip, &new_neighbour_port, old_neighbour_ip, &old_neighbour_port);
+
+                printf("Neighbour change msg: %s\n", token->message);
+                printf("%s %d %s %d\n", new_neighbour_ip, new_neighbour_port, old_neighbour_ip, old_neighbour_port);
+
+                if (protocol == TCP && is_neighbour_equal_to_TCP(old_neighbour_ip, old_neighbour_port) == TRUE)
+                {
+                    change_neighbour_TCP(new_neighbour_ip, new_neighbour_port);
+                }
+                else if (protocol == UDP && 0)
+                {
+                    // TODO
+                }
+                token->type == CONFIRMATION;
+
+            }
+            else if (token->type == CONFIRMATION)
+            {
+                char new_commer_ip[SIZE];
+                int new_commer_port;
+                char his_neighbour_ip[SIZE];
+                int his_neighbour_port;
+                sscanf(token->message, "%s %d %s %d", new_commer_ip, &new_commer_port, his_neighbour_ip, &his_neighbour_port);
+
+                if (protocol == TCP && is_myself_equal_to_TCP(his_neighbour_ip, his_neighbour_port))
+                {
+                    confirm_in_connection_change_TCP();
+                    memset(token, '\0', sizeof(*token));
+                    token->is_busy = FALSE;
+                }
+                else if (protocol == UDP && 0)
+                {
+                    // TODO
+                }
             }
         }
 
         if (token->is_busy == FALSE)
         {
+            // check if there are requests to connect
+            check_connection_request();
+
             if (to_send_system != NULL)
             {
                 strcpy(token-> message, to_send_system);
+                strcpy(token->receiver, RECV_ANY);
                 token->type = CHANGE_NEIGHBOUR;
-                free(to_send_system);
+//                free(to_send_system);
                 to_send_system = NULL;
                 strcpy(token->sender, id);
                 token->is_busy = TRUE;
-                printf("SENT\n");
+                printf("SENT SYSTEM\n");
             }
             else if (to_send_normal != NULL)
             {
@@ -153,6 +191,7 @@ void *start(void *ptr)
             }
         }
         pthread_mutex_unlock(&memory_mutex);
+
 
         send_token(token);
         has_token = FALSE;

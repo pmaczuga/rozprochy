@@ -10,16 +10,8 @@ void print_error(const char *msg);
 
 void print_error_with_errno(const char *msg);
 
-/**
- * @param str   ip:port
- * @return      ip as string
- */
 char *get_IP_from_ip_colon_port(const char *str);
 
-/**
- * @param str   ip:port
- * @return      port as int
- */
 int get_port_from_ip_colon_port(const char *str);
 
 char *get_this_IP();
@@ -28,8 +20,8 @@ int set_socket_blocking(int socket_fd);
 
 int set_socket_non_blocking(int socket_fd);
 
-char *get_IP_from_sockaddr(struct sockaddr* address);
+char *get_IP_from_sockaddr(struct sockaddr_in* address);
 
-int get_port_from_sockaddr(struct sockaddr* address);
+int get_port_from_sockaddr(struct sockaddr_in* address);
 
 #endif //ZAD1_USEFUL_H

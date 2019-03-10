@@ -107,6 +107,8 @@ errno.h
 -
 zconf.h
 -
+stdint.h
+-
 tcp.h
 /home/pawel/Documents/rozprochy/zad1/tcp.h
 useful.h

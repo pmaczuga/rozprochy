@@ -9,9 +9,10 @@
 
 #define SIZE 1024
 
-
 #define TRUE 1
 #define FALSE 0
+
+#define RECV_ANY "ANY"
 
 enum Protocol
 {

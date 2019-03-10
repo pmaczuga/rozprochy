@@ -28,8 +28,8 @@ int token_at_start = FALSE;
 // sockets, addr structs
 int socket_in;
 int socket_out;
-struct sockaddr *address_in;
-struct sockaddr *address_out;
+struct sockaddr_in *address_in;
+struct sockaddr_in *address_out;
 
 void handle_INT(int sig_number)
 {
@@ -146,15 +146,12 @@ int main(int argc, const char* argv[])
     printf("PORT: %d\n", get_port_from_sockaddr(address_in));
     printf("\n");
 
-    pthread_t input_thread;
-    pthread_create(&input_thread, NULL, &read_input, NULL);
-
     while(1)
     {
         char msg[SIZE];
         char receiver[SIZE];
         scanf("%s %[^.\n]", receiver, msg);
-        printf("!!!\n");
+        printf("Scanned correctly\n");
         send_message(receiver, msg);
 
         char *recv_msg = receive_message();

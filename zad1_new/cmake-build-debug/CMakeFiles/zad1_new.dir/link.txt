@@ -1,0 +1,1 @@
+/usr/bin/cc  -pthread -g   CMakeFiles/zad1_new.dir/main.c.o CMakeFiles/zad1_new.dir/token.c.o CMakeFiles/zad1_new.dir/config.c.o CMakeFiles/zad1_new.dir/Queue.c.o CMakeFiles/zad1_new.dir/communication.c.o CMakeFiles/zad1_new.dir/tcp.c.o  -o zad1_new 

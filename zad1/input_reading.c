@@ -14,8 +14,8 @@ char *buffer = NULL;
 
 char *get_input()
 {
-    char *return_buffer = malloc(SIZE);
-    memset(return_buffer, '\0', SIZE);
+    char *return_buffer = malloc(SIZE * sizeof(char));
+    memset(return_buffer, '\0', SIZE * sizeof(char));
 
     pthread_mutex_lock(&memory_acces_mutex);
     if (buffer != NULL)
