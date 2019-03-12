@@ -1,4 +1,8 @@
 # Zadanie - Gniazda TCP/UDP
+
+## Wynik
+9 pkt
+
 ## Zadanie domowe
 
 Celem zadania jest napisanie aplikacji w języku C lub C++ (lub python, ale uwaga na punktację!), która pozwoli użytkownikom na przesyłanie (nadawanie i wyświetlanie) informacji bez wykorzystania serwera centralnego poprzez logiczną symulację architektury token ring. Każdy klient podczas uruchomienia otrzymuje cztery argumenty:
