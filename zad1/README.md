@@ -1,9 +1,10 @@
 # Zadanie - Gniazda TCP/UDP
 ## Zadanie domowe
 
-Celem zadania jest napisanie aplikacji w języku C lub C++, która pozwoli użytkownikom na przesyłanie (nadawanie i wyświetlanie) informacji bez wykorzystania serwera centralnego poprzez logiczną symulację architektury token ring. Każdy klient podczas uruchomienia otrzymuje cztery argumenty:
+Celem zadania jest napisanie aplikacji w języku C lub C++ (lub python, ale uwaga na punktację!), która pozwoli użytkownikom na przesyłanie (nadawanie i wyświetlanie) informacji bez wykorzystania serwera centralnego poprzez logiczną symulację architektury token ring. Każdy klient podczas uruchomienia otrzymuje cztery argumenty:
 
 - tekstowy identyfikator użytkownika,
+- port na którym dany klient nasłuchuje,
 - adres IP i port sąsiada, do którego przekazywane będą wiadomości,
 - informacja o tym, czy dany użytkownik po uruchomieniu posiada token,
 - wybrany protokół: tcp lub udp.
@@ -12,22 +13,22 @@ Wiadomości przekazywane są tylko w jedną stronę. W sieci znajduje się tylko
 
 Punktacja przedstawia się następująco:
 
-1. Implementacja klientów - wersja TCP: 2pkt
-2. Implementacja klientów - wersja UDP: 1pkt
-3. Mechanizm dołączania nowych klientów: 2pkt
-4. Implementacja loggera i mechanizmu logowania: 1 pkt
-5. Poprawna obsługa gniazd i protokołu TCP: 0,5pkt
-6. Poprawna obsługa gniazd i protokołu UDP: 0,5pkt
-7. Zagwarantowanie braku sytuacji zagłodzenia klientów: 1pkt
-8. Odpowiedź ustna przy oddawaniu programu: [-4; 4]pkt
+- Implementacja klientów - wersja TCP: 2pkt
+- Implementacja klientów - wersja UDP: 1pkt
+- Mechanizm dołączania nowych klientów: 2pkt
+- Implementacja loggera i mechanizmu logowania: 1 pkt
+- Poprawna obsługa gniazd i protokołu TCP: 0,5pkt
+- Poprawna obsługa gniazd i protokołu UDP: 0,5pkt
+- Zagwarantowanie braku sytuacji zagłodzenia klientów: 1pkt
+- Odpowiedź ustna przy oddawaniu programu: [-4; 4]pkt
+- Użycie języka python: -4pkt
 
 Za zadanie można otrzymać minimalnie 0, a maksymalnie 10 punktów. Otrzymanie niezerowej ilości punktów za podpunkty 3-7 wymaga wykonania podpunktu 1 lub 2. Pytania mogą dotyczyć kodu lub wiedzy podanej w wymaganiach do laboratorium (nie trzeba znać dokładnie sygnatur metod i funkcji, z których się korzysta, ale jeżeli korzysta się z jakiejś flagi, to warto wiedzieć co ona z grubsza oznacza). Należy przesłać kod źródłowy wraz z skryptem kompilującym rozwiązanie (mile widziany cmake, ewentualnie make) w formie zgodnej z regulaminem przedmiotu.
 
 - Uwagi
-  - Nie wolno korzystać z frameworków do komunikacji sieciowej - tylko gniazda!
+  - Nie wolno korzystać z frameworków do komunikacji sieciowej – tylko gniazda!
   - Nie wolno też korzystać z Akka
   - Brak rozwiązania na moodle = 0 punktów
 - Przy oddawaniu należy:
   - zademonstrować działanie aplikacji (min. 3 klientów)
   - omówić kod źródłowy i odpowiedzieć na pytania
-
