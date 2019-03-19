@@ -32,10 +32,10 @@ new UDP().setValue("mcast_group_addr",InetAddress.getByName("230.100.200.x"))
 ```
 
 Tutorial opisujący mechanizm przesyłania stanu za pomocą biblioteki JGroups:  
-```http://www.jgroups.org/manual/index.html#StateTransfer```
+http://www.jgroups.org/manual/index.html#StateTransfer
 
 Tutorial opisujący mechanizm łączenia partycji za pomocą biblioteki JGroups:  
-```http://www.jgroups.org/manual/index.html#HandlingNetworkPartitions```
+http://www.jgroups.org/manual/index.html#HandlingNetworkPartitions
 
  
 
