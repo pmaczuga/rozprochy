@@ -1,8 +1,11 @@
 import org.jgroups.*;
-import org.jgroups.protocols.pbcast.ViewHandler;
+import org.jgroups.protocols.*;
+import org.jgroups.protocols.pbcast.*;
+import org.jgroups.stack.Protocol;
 import org.jgroups.util.Util;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.util.*;
 
 import static org.jgroups.util.Util.close;
@@ -14,8 +17,11 @@ public class DistributedMap extends ReceiverAdapter implements SimpleStringMap
 
     public DistributedMap() throws Exception
     {
-        channel = new JChannel();
-        channel.connect("Map");
+        System.setProperty("java.net.preferIPv4Stack", "true");
+        channel = new JChannel(getProtocolStack());
+        channel.setReceiver(this);
+        channel.connect("channelNameDifferentThanOthers");
+        channel.getState(null, 10000);
     }
 
     public boolean containsKey(String key)
@@ -64,13 +70,13 @@ public class DistributedMap extends ReceiverAdapter implements SimpleStringMap
     @Override
     public void viewAccepted(View new_view) {
         System.out.println("** view: " + new_view);
+        System.out.print("> "); System.out.flush();
         handleView(channel, new_view);
     }
 
     @Override
     public void receive(Message msg)
     {
-        System.out.println("Received message");
         Operation op = msg.getObject();
 
         synchronized(map) {
@@ -123,6 +129,28 @@ public class DistributedMap extends ReceiverAdapter implements SimpleStringMap
         return string;
     }
 
+    private Protocol[] getProtocolStack() throws Exception
+    {
+        Protocol[] prot_stack = {
+                new UDP().setValue("mcast_group_addr", InetAddress.getByName("230.100.200.163")),
+                new PING(),
+                new MERGE3(),
+                new FD_SOCK(),
+                new FD_ALL(),
+                new VERIFY_SUSPECT(),
+                new BARRIER(),
+                new NAKACK2(),
+                new UNICAST3(),
+                new STABLE(),
+                new GMS(),
+                new UFC(),
+                new MFC(),
+                new FRAG2(),
+                new STATE_TRANSFER()};
+
+        return prot_stack;
+    }
+
     private static void handleView(JChannel ch, View new_view)
     {
         if(new_view instanceof MergeView)
@@ -147,7 +175,7 @@ public class DistributedMap extends ReceiverAdapter implements SimpleStringMap
         public void run()
         {
             List<View> subgroups = view.getSubgroups();
-            View tmp_view = subgroups.get(0); // picks the first
+            View tmp_view = subgroups.get(0);
             Address local_addr = ch.getAddress();
             if (!tmp_view.getMembers().contains(local_addr))
             {
@@ -156,9 +184,7 @@ public class DistributedMap extends ReceiverAdapter implements SimpleStringMap
                 try
                 {
                     ch.getState(null, 30000);
-                } catch (Exception ignored) {
-
-                }
+                } catch (Exception ignored) { }
             }
             else
             {
