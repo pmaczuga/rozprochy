@@ -81,6 +81,8 @@ public class Doctor
             channel.basicPublish(LOG_EXCHANGE_NAME, "", null, actualMessage.getBytes("UTF-8"));
             System.out.println("Sent: \"" + actualMessage + "\" to \"" + type + "\"engineer");
         }
+
+        channel.close();
     }
 
     private static String getType(String msg)
