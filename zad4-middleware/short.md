@@ -3,7 +3,7 @@
 ## CORBA
 - Common Object Request Broker Architecture
 - "matka wszystkich technologii"
-- middlewae
+- middleware
 - komunikacaja pomiędzy aplikacjami:
 	- na różnych maszynach
 	- różne os
@@ -15,7 +15,7 @@
 ## Pojęcia:
 - IDL:
 	- język definicji interfejsów
-	- definiuje kontakt pomiędzy klientem a serwerem
+	- definiuje kontrakt pomiędzy klientem a serwerem
 - stub i skeleton:
 	- stub:
 		- po stronie klienta
