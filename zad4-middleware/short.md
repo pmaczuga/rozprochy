@@ -24,7 +24,13 @@
 		- po stronie serwera
 		- punkt wejścia dla systemu rozproszonego
 		- konwertuje napływające dane, wywołuje metody, zwraca wyniki
-
+- objekt, serwant, serwer:
+	- objekt:
+		- abstrakcja posiadająca jednoznaczną identyfikację oraz interfejs i odpowiadajaca na żądania klientów
+	- serwant:
+		- element strony serwerowej, implementacja funkcjonalności interfejsu w konkretnym języku
+	- serwer:
+		- serwer :)
 - object adapter:
 	- ekspnuje gniazda do zdalnej komunikacji
 	- kieruje żądania adresowe do odpowiednich serwantów
@@ -36,4 +42,3 @@
 	- wywołanie metody w innej przestrzeni adresowej (innym komputerze) bez kodowania szczegółów
 - przezroczystość:
 	- właściwość systemu powodująca postrzeganie systemu przez użytkownika jako całości, a nie poszczególnych składowych
-	
