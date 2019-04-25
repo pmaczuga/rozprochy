@@ -59,13 +59,3 @@ Sposób wykonania zadania będzie miał zasadniczy wpływ na ocenę. W szczegól
 - nieznajomość zasad działania aplikacji w zakresie zastosowanych mechanizmów: -10 pkt.
 
 Punktacja dotyczy sytuacji ekstremalnych - całkowitego braku pewnego mechanizmu albo pełnej i poprawnej implementacji - możliwe jest przyznanie części punktów (lub punktów karnych).
-
-Pozostałe uwagi
-
-Zadanie trzeba zaprezentować sprawnie, na jednego studenta przypada 6,5 minuty…
-
-Termin nadesłania zadania dla wszystkich grup: 6 maja, godz. 9:30. 
-
-Prezentowane musi być zadania zamieszczone na moodle, tj. bez żadnych późniejszych poprawek.
-
-Przypominam o konieczności dołączenia do zadania oświadczenia o samodzielnym jego wykonaniu (co oczywiście nie wyklucza konsultacji pomiędzy studentami jak zrealizować poszczególne funkcjonalności).
