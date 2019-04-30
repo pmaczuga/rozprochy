@@ -4,3 +4,8 @@
 **/.idea
 
 **/out
+
+
+**/gen
+**/gen-java
+**/gen-py
