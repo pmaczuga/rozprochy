@@ -1,0 +1,29 @@
+// protoc.exe -I=. --java_out=gen --plugin=protoc-gen-grpc-java=protoc-gen-grpc-java.exe --grpc-java_out=gen currency.proto
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "sr.grpc.gen";
+option java_outer_classname = "CurrencyProto";
+
+package currency;
+
+enum ExchangeCurrency {
+  PLN = 0;
+  USD = 1;
+  EUR = 2;
+  GBP = 3;
+}
+
+message ExchangeRequest {
+  repeated ExchangeCurrency currencies = 1;
+}
+
+message ExchangeResponse {
+  ExchangeCurrency currency = 1;
+  double exchangeRate = 2;
+}
+
+service StreamExchange {
+  rpc requestExchangeRate(ExchangeRequest) returns (stream ExchangeResponse) {}
+}

@@ -1,3 +1,6 @@
+// thrift --gen java bank.thrift
+// thrift --gen py bank.thrift
+
 namespace java sr.rpc.thrift
 
 enum BankCurrency {
@@ -22,30 +25,16 @@ struct AccountCreationInfo {
   3:AccountType type
 }
 
+struct AccountInfo {
+  1:string pesel
+  2:string name
+  3:string surname
+  4:AccountType type
+}
+
 struct CreditInfo {
-  1:MoneyStruct costRequestetCurrency
+  1:MoneyStruct costRequestedCurrency
   2:MoneyStruct costHomeCurrency
-}
-
-service AccountCreator{
-  AccountCreationInfo create(1:string name, 2:string surname, 3:string pesel, 4:MoneyStruct income)
-}
-
-service AccountService {
-  MoneyStruct balance(1:string pesel, 2:string encryptedkey)
-  list<BankCurrency> supportedCurrencies()
-}
-
-service Standard extends AccountService {
-}
-
-service Premium extends AccountService {
-  CreditInfo requestCredit(1:string pesel, 2:string encryptedkey, 3:MoneyStruct amount, 4: i32 timeInMonths)
-}
-
-exception InvalidArguments {
-  1:i32 argNum
-  2:string reason
 }
 
 exception NoSuchAccount {
@@ -57,5 +46,32 @@ exception WrongKey {
   2:string wrongEncryptedKey
 }
 
+exception WrongMoney {
+  1:string money
+}
+
+exception UnsupportedCurrency {
+  1:string currency
+}
+
 exception NonPremiumOperationRequest {
+}
+
+service AccountCreator{
+  AccountCreationInfo create(1:string name, 2:string surname, 3:string pesel, 4:MoneyStruct income)
+    throws (1:WrongMoney wm, 2:UnsupportedCurrency uc)
+  list<BankCurrency> supportedCurrencies()
+}
+
+service StandardAccount {
+  MoneyStruct balance(1:string pesel, 2:string encryptedkey)
+    throws (1:NoSuchAccount nsa, 2:WrongKey wk)
+  AccountInfo validate(1:string pesel, 2:string encryptedkey)
+    throws (1:NoSuchAccount nsa, 2:WrongKey wk)
+  
+}
+
+service PremiumAccount extends StandardAccount {
+  CreditInfo requestCredit(1:string pesel, 2:string encryptedkey, 3:MoneyStruct amount, 4: i32 timeInMonths)
+    throws (1:NoSuchAccount nsa, 2:WrongKey wk, 3:UnsupportedCurrency uc, 4:WrongMoney wm)
 }

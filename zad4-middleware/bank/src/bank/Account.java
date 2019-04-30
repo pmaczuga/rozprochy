@@ -1,6 +1,7 @@
 package bank;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import sr.rpc.thrift.AccountInfo;
 import sr.rpc.thrift.AccountType;
 
 public class Account
@@ -24,7 +25,13 @@ public class Account
 
     public boolean verify(String encryptedKey)
     {
-        return DigestUtils.md5Hex(key).toUpperCase().equals(encryptedKey);
+        String properEncrypted = DigestUtils.md5Hex(key).toUpperCase();
+        return properEncrypted.equals(encryptedKey);
+    }
+
+    public AccountInfo accountInfo()
+    {
+        return new AccountInfo(pesel, name, surname, type);
     }
 
     public String getName() {
@@ -53,6 +60,6 @@ public class Account
 
     @Override
     public String toString() {
-        return type.toString() + ": " + pesel;
+        return type + ": " + pesel + "   key: " + key;
     }
 }

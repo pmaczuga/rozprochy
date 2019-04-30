@@ -1,10 +1,11 @@
 package bank;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDatabase
 {
-    private List<Account> accounts;
+    private List<Account> accounts = new ArrayList<>();
 
     public Account getAccount(String pesel)
     {
