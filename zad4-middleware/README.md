@@ -1,8 +1,11 @@
-## Aplikacja obsługi kont bankowych
+# Aplikacja obsługi kont bankowych
+
+## Punktacja
+7/10
 
 *Typowy problem systemów rozproszonych :) :)*
 
-### Opis funkcjonalności
+## Opis funkcjonalności
 
 Celem zadania jest stworzenie aplikacji do obsługi kont bankowych o następującej funkcjonalności
 
@@ -14,7 +17,7 @@ Celem zadania jest stworzenie aplikacji do obsługi kont bankowych o następują
 
 W aplikacji można więc wyróżnić trzy elementy: 1. usługa informująca banki o aktualnym kursie walut, 2. bank, 3. klient banku.
 
-### Realizacja
+## Realizacja
 
 Usługa informująca o aktualnym kurcie walut natychmiast po podłączeniu się jej klienta (czyli banku) przesyła kursy walut wszystkich wyspecyfikowanych przez Bank w walucie rodzimej, a później okresowo i niezależnie dla różnych walut informuje o zmianach ich kursów (symulując te zmiany). Różne banki mogą być zainteresowane różnymi walutami - usługa powinna to brać pod uwagę.  Komunikację pomiędzy bankiem a usługą należy zrealizować z wykorzystaniem gRPC i mechanizmu strumieniowania (_stream_), a nie _pollingu_. Kurs walut powinien się nieco wahać zmieniając dość często (np. co 5 sekund) by móc zaobserwować działanie usługi w czasie demonstracji zadania. Zbiór obsługiwanych walut jest zamknięty (_enum_).
 
@@ -47,7 +50,7 @@ Pliki generowane (stub, skeleton) powinny się znajdować w osobnym katalogu ni�
 
 Dla chętnych: wielowątkowość implementacji strony serwerowej usługi bankowej.
 
-### Sposób oceniania
+## Sposób oceniania
 
 Sposób wykonania zadania będzie miał zasadniczy wpływ na ocenę. W szczególności:
 

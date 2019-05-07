@@ -1,5 +1,8 @@
 # RabbitMQ
 
+## Punktacja
+8/10
+
 Prezentacja: [RabbitMQ](rabbitmq.pdf)
 
 ## Zadanie
