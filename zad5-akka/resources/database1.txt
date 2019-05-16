@@ -1,0 +1,4 @@
+Lord of the Rings;100
+abc;120
+wrong record
+Ala ma kota;1000
