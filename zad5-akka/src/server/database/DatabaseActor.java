@@ -54,11 +54,7 @@ public class DatabaseActor extends AbstractActor
 
     @Override
     public void postRestart(Throwable reason) throws Exception {
+        Thread.sleep(500);
         getContext().getParent().tell(new ResendRequest(), getSelf());
-    }
-
-    @Override
-    public void preRestart(Throwable reason, Option<Object> message) throws Exception {
-        Thread.sleep(5000);
     }
 }

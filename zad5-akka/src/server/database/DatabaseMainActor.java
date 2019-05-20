@@ -9,6 +9,8 @@ import akka.pattern.BackoffSupervisor;
 import scala.concurrent.duration.Duration;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DatabaseMainActor extends AbstractActor
 {
@@ -35,12 +37,10 @@ public class DatabaseMainActor extends AbstractActor
                     context().stop(getSelf());
                 })
                 .match(NotFound.class, n -> {
-                    notFoundCount++;
-                    if (notFoundCount == DATABASE_COUNT)
-                    {
-                        client.tell(n, null);
-                        context().stop(getSelf());
-                    }
+                    handleNotFound();
+                })
+                .match(Terminated.class, t -> {
+                    handleNotFound();
                 })
                 .match(ResendRequest.class, rr -> {
                     getSender().tell(titleToFind, getSelf());
@@ -51,8 +51,10 @@ public class DatabaseMainActor extends AbstractActor
 
     @Override
     public void preStart() throws Exception {
-        context().actorOf(Props.create(DatabaseActor.class, database1), "database1_actor");
-        context().actorOf(Props.create(DatabaseActor.class, database2), "database2_actor");
+        ActorRef a1 = context().actorOf(Props.create(DatabaseActor.class, database1), "database1_actor");
+        ActorRef a2 = context().actorOf(Props.create(DatabaseActor.class, database2), "database2_actor");
+        context().watch(a1);
+        context().watch(a2);
     }
 
     private static SupervisorStrategy strategy
@@ -64,5 +66,14 @@ public class DatabaseMainActor extends AbstractActor
     @Override
     public SupervisorStrategy supervisorStrategy() {
         return strategy;
+    }
+
+    private void handleNotFound() {
+        notFoundCount++;
+        if (notFoundCount == DATABASE_COUNT)
+        {
+            client.tell(new NotFound(), null);
+            context().stop(getSelf());
+        }
     }
 }

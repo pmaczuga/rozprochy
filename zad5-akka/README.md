@@ -52,4 +52,4 @@ Język
 - Dowolny obsługiwany przez Akka
 
 # Diagram
-![diagram](diagram.png)
+![diagram](diagram.jpg)

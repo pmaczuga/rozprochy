@@ -1,2 +1,3 @@
-Kot ma Ale;13
-Kot w butach;7
+Hobbit;13
+Malazan book of the fallen;1200
+Black Company;500
