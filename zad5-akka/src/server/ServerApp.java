@@ -30,7 +30,7 @@ public class ServerApp
             if (line.equals("q")) {
                 break;
             }
-            actor.tell(new Request(line), null);
+//            actor.tell(new Request(line), null);
         }
 
         system.terminate();

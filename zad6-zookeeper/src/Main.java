@@ -16,7 +16,7 @@ public class Main
     {
         ZooKeeper zoo;
         ZKConnection connection = new ZKConnection();
-        zoo = connection.connect("127.0.0.1:2181");
+        zoo = connection.connect("127.0.0.1:2182");
 //        zoo.create("/b", "abc".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
         Watcher childrenWatcher = new Watcher() {
@@ -75,9 +75,8 @@ public class Main
 
     private static void open_app()
     {
-        File file = new File("C:\\Program Files\\Notepad++\\notepad++.exe");
         try {
-            process = Runtime.getRuntime().exec("C:\\Program Files\\Notepad++\\notepad++.exe");
+            process = Runtime.getRuntime().exec("C:\\Program Files\\MPC-HC\\mpc-hc64.exe");
         } catch (IOException ignored) {}
     }
 
