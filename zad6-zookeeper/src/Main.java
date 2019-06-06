@@ -17,7 +17,6 @@ public class Main
         ZooKeeper zoo;
         ZKConnection connection = new ZKConnection();
         zoo = connection.connect("127.0.0.1:2182");
-//        zoo.create("/b", "abc".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
         Watcher childrenWatcher = new Watcher() {
             @Override
@@ -68,7 +67,7 @@ public class Main
                 break;
             } else if (input.equals("ls"))
             {
-                print_structure(zoo, "/", "");
+                print_structure(zoo, "/z", "");
             }
         }
     }
@@ -91,9 +90,14 @@ public class Main
 
     private static void print_structure(ZooKeeper zoo, String path, String prefix) throws Exception
     {
+        if (path.equals("/"))
+            System.out.println(path);
+        else {
+            String[] parts = path.split("/");
+            System.out.println(prefix + parts[parts.length - 1]);
+        }
         for (String znode: zoo.getChildren(path, false))
         {
-            System.out.println(prefix + znode);
             if (path.equals("/"))
                 print_structure(zoo, path + znode, prefix + "|  ");
             else
